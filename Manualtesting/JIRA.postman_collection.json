@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "4f391b78-8691-490d-a465-2e7a028a4f0e",
+		"name": "JIRA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Issues",
+			"item": [
+				{
+					"name": "Create Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var json = pm.response.json();",
+									"",
+									"console.log(json);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "C7EA4FD5846A4C58562E17647A38E969",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": {\r\n       \"project\":\r\n       {\r\n          \"key\": \"RES\"\r\n       },\r\n       \"summary\": \"unAuthroized defect.\",\r\n       \"description\": \"Delete issue for non user \",\r\n       \"issuetype\": {\r\n          \"name\": \"Bug\"\r\n       }\r\n   }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{jira}}/rest/api/2/issue/",
+							"protocol": "http",
+							"host": [
+								"{{jira}}"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Issues Specific to Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// Covert to JSON\r",
+									"var response = pm.response.json();\r",
+									"\r",
+									"console.log(response.issues);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "<enter_your_username>",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "<enter_your_password>",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://testleaf201902.atlassian.net/rest/api/2/search?jql=project=\"TUNA\"",
+							"protocol": "https",
+							"host": [
+								"localhost",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"search"
+							],
+							"query": [
+								{
+									"key": "jql",
+									"value": "project=\"TUNA\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete issue",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": "\n"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://svcsjan2019.atlassian.net/rest/api/2/issue/10002",
+							"protocol": "https",
+							"host": [
+								"localhost",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"10002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Fields",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \"fields\": {\n        \"summary\": \"Updated Eclipse defact to fix defect\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/rest/api/2/issue/10126",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"10126"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Session Cookie",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\": \"ibrahim_nasr\", \"password\": \"<enter_your_password>\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{jira}}/rest/auth/1/session",
+							"protocol": "http",
+							"host": [
+								"{{jira}}"
+							],
+							"path": [
+								"rest",
+								"auth",
+								"1",
+								"session"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "<enter_your_password>",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "<enter_your_username>",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "jira",
+			"value": "localhost:8080"
+		}
+	]
+}
