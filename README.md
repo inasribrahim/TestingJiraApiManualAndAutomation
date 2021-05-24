@@ -2,7 +2,7 @@
 1-Test Jira API manual using postman <br>
 2-Test jira API automation using restAssured <br>
 
-# To reuse code Go to SessionCoolie/session.class and Files/env.properties <br>
+# To reuse code Go to SessionCookie/session.class and Files/env.properties <br>
 1. Enter your_username and password <br>
 2. Change host to your domin that jira is hosted <br>
 
